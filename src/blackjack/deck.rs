@@ -3,6 +3,7 @@ extern crate rand;
 use rand::{thread_rng, Rng};
 use blackjack::card::Card;
 
+#[derive(Clone)]
 pub struct Deck {
     pub cards: Vec<Card>
 }
@@ -20,7 +21,7 @@ impl Deck {
         thread_rng().shuffle(self.cards.as_mut_slice());
     }
 
-    pub fn deal_card(&mut self) -> Card {
+    pub fn draw_card(&mut self) -> Card {
         return self.cards.pop().unwrap();
     }
 }
@@ -37,11 +38,11 @@ fn test_shuffle() {
 }
 
 #[test]
-fn test_deal_card() {
+fn test_draw_card() {
     let mut deck = Deck { cards: vec![] };
     deck.shuffle();
-    deck.deal_card();
+    deck.draw_card();
     assert_eq!(deck.cards.len(), 51);
-    deck.deal_card();
+    deck.draw_card();
     assert_eq!(deck.cards.len(), 50);
 }

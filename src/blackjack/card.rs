@@ -1,3 +1,4 @@
+#[derive(Clone)]
 pub struct Card {
     pub suit: String,
     pub value: String
@@ -18,10 +19,10 @@ impl Card {
 
     fn score_for_face_card(&self) -> u32 {
         let score = match self.value.as_str() {
-            "J" => 11,
-            "Q" => 12,
-            "K" => 13,
-            "A" => 14,
+            "J" => 10,
+            "Q" => 10,
+            "K" => 10,
+            "A" => 11,
             _ => 0
         };
         return score;
@@ -43,7 +44,7 @@ fn test_score_for_numbers() {
 #[test]
 fn test_score_for_face_card() {
     let card = Card { suit: "Hearts".into(), value: "K".into() };
-    assert_eq!(card.score(), 13);
+    assert_eq!(card.score(), 10);
 }
 
 #[test]

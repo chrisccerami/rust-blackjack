@@ -3,12 +3,14 @@ extern crate rand;
 mod blackjack;
 
 use blackjack::deck::Deck;
+use blackjack::player::Player;
+use blackjack::game::Game;
 
 fn main() {
-    let mut deck = Deck { cards: vec![] };
-    deck.shuffle();
-    let first_card = deck.deal_card();
-    let second_card = deck.deal_card();
-    println!("First Card: {}, score: {}", first_card.name(), first_card.score());
-    println!("Second Card: {}, score: {}", second_card.name(), second_card.score());
+    let deck = Deck { cards: vec![] };
+    let player_one = Player { hand: vec![], name: "Player One".into() };
+    let player_two = Player { hand: vec![], name: "Player Two".into() };
+    let mut game = Game { deck: deck, players: vec![player_one, player_two] };
+    game.deal();
+    game.pick_winner();
 }
